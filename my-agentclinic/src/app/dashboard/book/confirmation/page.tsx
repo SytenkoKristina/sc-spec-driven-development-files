@@ -1,18 +1,14 @@
 import Link from "next/link";
-import { db } from "@/lib/db";
+import { getAppointmentById } from "@/lib/appointments";
+import { getStringParam } from "@/lib/search-params";
 
 export default async function BookingConfirmationPage(
   props: PageProps<"/dashboard/book/confirmation">,
 ) {
   const searchParams = await props.searchParams;
-  const id = typeof searchParams.id === "string" ? searchParams.id : undefined;
+  const id = getStringParam(searchParams, "id");
 
-  const appointment = id
-    ? await db.appointment.findUnique({
-        where: { id },
-        include: { agent: true, ailment: true, therapy: true },
-      })
-    : null;
+  const appointment = id ? await getAppointmentById(id) : null;
 
   if (!appointment) {
     return (

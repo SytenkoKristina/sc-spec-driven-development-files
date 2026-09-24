@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Layout from "@/components/layout/Layout";
+import "./home.css";
 
 export default function Home() {
   return (

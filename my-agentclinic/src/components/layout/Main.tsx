@@ -1,5 +1,9 @@
 import type { ReactNode } from "react";
 
-export default function Main({ children }: { children: ReactNode }) {
+type MainProps = {
+  children: ReactNode;
+};
+
+export default function Main({ children }: MainProps) {
   return <main className="site-main">{children}</main>;
 }

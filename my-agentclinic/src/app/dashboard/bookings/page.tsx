@@ -1,12 +1,9 @@
-import { db } from "@/lib/db";
+import { listUpcomingAppointments } from "@/lib/appointments";
 
 export const dynamic = "force-dynamic";
 
 export default async function BookingsPage() {
-  const appointments = await db.appointment.findMany({
-    orderBy: { scheduledFor: "asc" },
-    include: { agent: true, ailment: true, therapy: true },
-  });
+  const appointments = await listUpcomingAppointments();
 
   return (
     <section>

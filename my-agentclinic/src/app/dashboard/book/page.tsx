@@ -1,11 +1,12 @@
+import SubmitButton from "@/components/forms/SubmitButton";
 import { db } from "@/lib/db";
+import { getStringParam } from "@/lib/search-params";
 import { createBooking } from "./actions";
 
 export default async function BookPage(props: PageProps<"/dashboard/book">) {
   const searchParams = await props.searchParams;
-  const name = typeof searchParams.name === "string" ? searchParams.name : "";
-  const ailmentId =
-    typeof searchParams.ailmentId === "string" ? searchParams.ailmentId : "";
+  const name = getStringParam(searchParams, "name") ?? "";
+  const ailmentId = getStringParam(searchParams, "ailmentId") ?? "";
 
   if (name && ailmentId) {
     const ailment = await db.ailment.findUnique({
@@ -38,7 +39,7 @@ export default async function BookPage(props: PageProps<"/dashboard/book">) {
               name="scheduledFor"
               required
             />
-            <button type="submit">Confirm booking</button>
+            <SubmitButton pendingLabel="Booking…">Confirm booking</SubmitButton>
           </form>
         </section>
       );
