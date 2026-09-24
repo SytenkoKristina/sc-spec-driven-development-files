@@ -29,11 +29,10 @@
 
 ## Styling / UI
 
-- Not yet decided. Should support an "attractive, modern-browser"
-  site (Steve's ask) without slowing down the small-phases roadmap —
-  a utility-first CSS approach or a small component library are the
-  leading candidates, to be finalized when the landing page phase
-  starts.
+- **Tailwind CSS** (Phase 1), chosen over a component library or
+  plain CSS Modules for speed of iteration on an attractive, small,
+  live-demoable landing page (Steve's ask). Utility classes style
+  `src/app` directly; `globals.css` is just Tailwind's import.
 
 ## Tooling
 
@@ -53,5 +52,5 @@
 ## Open decisions
 
 This file intentionally leaves some choices unresolved (database,
-styling, deployment, formatting) rather than guessing. Each should be
+deployment, formatting) rather than guessing. Each should be
 settled — and this file updated — when its roadmap phase starts.
