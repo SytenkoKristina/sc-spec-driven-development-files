@@ -18,32 +18,27 @@ the starting sequence.
   (Steve's ask) — this is the first thing visitors see.
 - Static content only; no data layer yet.
 
-## Phase 2 — Dashboard shell
-- Add the dashboard route(s) with basic navigation and layout, no
-  auth or real data yet — empty/placeholder states only.
-- Establishes the shared shell that agent- and staff-facing views
-  will build on (Mary's ask).
-
-## Phase 3 — Core domain model
-- Define the data model for agents, ailments, and therapies.
-- Decide and wire up the data layer (see open decision in
-  `tech-stack.md`).
-- Basic read-only list/detail views in the dashboard.
-
-## Phase 4 — Booking flow
+## Phase 2 — Dashboard, domain model & booking flow
+- Add the dashboard route(s) with basic navigation and layout —
+  the shared shell that agent- and staff-facing views build on
+  (Mary's ask).
+- Define the data model for agents, ailments, and therapies; decide
+  and wire up the data layer (see open decision in `tech-stack.md`).
+- Basic read-only list/detail views in the dashboard, built on that
+  data model.
 - Let an agent pick an ailment, get matched to a therapy, and book an
-  appointment (Susan's core feature ask).
-- Keep the flow minimal: no cancellation/rescheduling yet.
+  appointment (Susan's core feature ask). Keep the flow minimal: no
+  cancellation/rescheduling yet.
+- Add a staff view of bookings: see and manage upcoming appointments,
+  connecting the shell to the booking data.
+- No auth yet — everything in the dashboard is open; auth lands in
+  the next phase.
 
-## Phase 5 — Staff view of bookings
-- Dashboard view for staff to see and manage upcoming appointments.
-- Connects Phase 2's shell to Phase 4's booking data.
-
-## Phase 6 — Accounts & access
+## Phase 3 — Accounts & access
 - Basic auth so agents and staff see the dashboard views relevant to
   them, rather than everything being open.
 
-## Phase 7 — Polish pass
+## Phase 4 — Polish pass
 - Responsive/accessibility/visual polish across landing page and
   dashboard.
 - Revisit open tech-stack decisions (styling, deployment, linting) if
