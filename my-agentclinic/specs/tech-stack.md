@@ -22,19 +22,31 @@
 
 ## Data layer
 
-- Not yet decided. The domain (agents, ailments, therapies,
-  appointments) is small and relational, so a lightweight embedded or
-  managed SQL database is the likely direction — to be finalized in a
-  follow-up decision and recorded here when chosen.
+- **SQLite** (embedded, file-based) via **Prisma** as the ORM (Phase
+  2). Chosen over managed Postgres to keep the project demoable with
+  zero external infra to provision, given this repo doubles as a
+  teaching/conference-demo artifact (`mission.md`). Schema lives in
+  `prisma/schema.prisma`; the Prisma Client is generated to
+  `src/generated/prisma` (gitignored) and accessed through the
+  singleton in `src/lib/db.ts`.
+- Pinned to **Prisma 6.19.3** (both `prisma` and `@prisma/client`),
+  not the `latest` dist-tag (8.0.0-rc at the time of writing) —
+  Prisma 7+ requires Node 20.19+/22.12+/24+, which excludes this
+  environment's Node 23.7.0 (an odd-numbered, non-LTS release).
+  Prisma 6.x supports Node >=18.18. Revisit the pin once the
+  environment is on an LTS Node version.
 
 ## Styling / UI
 
-- **PicoCSS** (superseded Tailwind CSS in Phase 2), a classless/
-  semantic-HTML-first CSS framework. Chosen so both the marketing
-  site and the dashboard get sensible default styling (typography,
-  forms, buttons, nav) from minimal markup, without hand-rolling
-  utility classes for dashboard/booking UI. Tailwind (Phase 1's
-  original choice) is removed as part of the Phase 2 work — see
+- **PicoCSS** (superseded Tailwind CSS in Phase 2), a
+  semantic-HTML-first CSS framework (the default build, not the
+  classless variant — a `.container` class is still used for
+  layout width, and `role="button"` styles link/button elements).
+  Chosen so both the marketing site and the dashboard get sensible
+  default styling (typography, forms, buttons, nav, tables) from
+  minimal markup, without hand-rolling utility classes for
+  dashboard/booking UI. Tailwind (Phase 1's original choice) is
+  removed as part of the Phase 2 work — see
   `specs/2026-09-24-dashboard-domain-model-booking-flow/`; the
   Phase 1 landing page is migrated to PicoCSS rather than left on
   Tailwind, so the repo has one styling system.
@@ -59,6 +71,6 @@
 
 ## Open decisions
 
-This file intentionally leaves some choices unresolved (database,
-deployment, formatting) rather than guessing. Each should be
-settled — and this file updated — when its roadmap phase starts.
+This file intentionally leaves some choices unresolved (deployment,
+formatting) rather than guessing. Each should be settled — and this
+file updated — when its roadmap phase starts.

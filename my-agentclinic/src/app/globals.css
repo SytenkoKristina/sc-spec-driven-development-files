@@ -1,1 +1,7 @@
-@import "tailwindcss";
+@import "@picocss/pico/css/pico.min.css";
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}

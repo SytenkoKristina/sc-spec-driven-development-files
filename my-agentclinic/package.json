@@ -8,15 +8,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed"
   },
   "dependencies": {
+    "@picocss/pico": "^2.1.1",
+    "@prisma/client": "^6.19.3",
     "next": "16.3.6",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@types/node": "^20",
@@ -25,8 +28,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
     "jsdom": "^27.0.1",
-    "postcss": "^8.5.28",
-    "tailwindcss": "^4.3.3",
+    "prisma": "^6.19.3",
+    "tsx": "^4.23.15",
     "typescript": "^5",
     "vitest": "^3.2.7"
   }
