@@ -14,7 +14,7 @@ Create:
 
 Refer to specs/mission.md and specs/tech-stack.md for guidance.
 
-Important: You *must* use your AskUserQuestion tool, grouped on these 3, before writing to disk.
+Important: , grouped on these 3, before writing to disk.
 
 ## Prompt 2
 
