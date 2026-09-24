@@ -17,6 +17,8 @@
   Components are used where they avoid unnecessary client JS
   (marketing pages especially), with client components reserved for
   interactive dashboard/booking UI.
+- Scaffolded via `create-next-app` (Phase 0) on Next.js 16.3.6 /
+  React 19.2.8, with the App Router under `src/app`.
 
 ## Data layer
 
@@ -35,9 +37,12 @@
 
 ## Tooling
 
-- `tsc` for type-checking/build (already in `package.json`).
+- Next.js's own scripts (`dev`/`build`/`start`) handle
+  type-checking/build; `tsc` is no longer invoked directly.
 - Package manager: npm (matches the committed `package-lock.json`).
-- Linting/formatting: to be added — not yet configured in this repo.
+- Linting: ESLint via `eslint-config-next` (Phase 0), using
+  `create-next-app`'s defaults. Formatting (e.g. Prettier) is still
+  not configured.
 
 ## Deployment
 
@@ -48,5 +53,5 @@
 ## Open decisions
 
 This file intentionally leaves some choices unresolved (database,
-styling, deployment, linting) rather than guessing. Each should be
+styling, deployment, formatting) rather than guessing. Each should be
 settled — and this file updated — when its roadmap phase starts.
