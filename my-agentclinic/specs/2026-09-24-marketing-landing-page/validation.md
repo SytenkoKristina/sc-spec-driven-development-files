@@ -10,6 +10,8 @@ This phase is done when all of the following hold:
 - [ ] `npm run build` completes successfully (no type errors, no
       lint-blocking errors) and produces a production build.
 - [ ] `npm run lint` passes.
+- [ ] `npm test` passes (Vitest render tests for the Header, Main,
+      Footer, Layout components and the `Home` page).
 
 ## Content
 

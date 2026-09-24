@@ -59,3 +59,41 @@ Numbered task groups, intended to be worked roughly in order.
      committing (in particular, confirm no leftover boilerplate
      assets or unused CSS survived).
 5.3. Commit with a message describing the Phase 1 landing page.
+
+## 6. Add a Header/Main/Footer layout
+
+6.1. Create `src/components/layout/Header.tsx`, `Main.tsx`, and
+     `Footer.tsx` as three separate subcomponents, plus
+     `Layout.tsx`, which composes them and takes `children` (the
+     page content) to render inside `<Main>`.
+6.2. Create `src/components/layout/layout.css` with plain CSS rules
+     for the header/main/footer elements — hand-written CSS, not
+     Tailwind utility classes, kept alongside (not replacing) the
+     existing Tailwind setup.
+6.3. Import `layout.css` into `Layout.tsx` via a plain ES import
+     (`import "./layout.css"`); Next.js bundles and links it
+     automatically, no manual `<link>` tag needed.
+6.4. Update `src/app/page.tsx` to wrap its existing hero/pitch/CTA
+     content in `<Layout>`, so that content becomes the children
+     rendered inside `<Main>`.
+6.5. Verify: `npm run dev` shows the header and footer around the
+     existing hero content with no console errors; `npm run build`
+     and `npm run lint` both pass.
+
+## 7. Add automated tests for the layout and home page
+
+7.1. Install `@testing-library/react`, `@testing-library/jest-dom`,
+     and `jsdom` as dev dependencies (Vitest itself is already a
+     dependency, per `tech-stack.md`'s Tooling section).
+7.2. Add `vitest.config.ts` (jsdom environment, a setup file for
+     jest-dom matchers, and a `@` → `src` resolve alias matching
+     `tsconfig.json`'s `paths`) and `vitest.setup.ts`.
+7.3. Write a colocated `*.test.tsx` for each of `Header`, `Main`,
+     `Footer`, and `Layout` (`src/components/layout/`), asserting on
+     what each renders (wordmark, children placement, copyright
+     line, composition of all three).
+7.4. Write `src/app/page.test.tsx` asserting the `Home` page renders
+     its hero heading, pitch copy, and a CTA link pointing at the
+     `mailto:` placeholder target.
+7.5. Run `npm test`, confirm all tests pass; confirm `npm run build`
+     and `npm run lint` still pass with the new test files present.

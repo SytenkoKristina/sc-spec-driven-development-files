@@ -1,0 +1,22 @@
+.site-header {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 2rem;
+}
+
+.site-header__wordmark {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.site-main {
+  flex: 1;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+  font-size: 0.875rem;
+  color: #666;
+}

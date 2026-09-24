@@ -42,6 +42,9 @@
 - Linting: ESLint via `eslint-config-next` (Phase 0), using
   `create-next-app`'s defaults. Formatting (e.g. Prettier) is still
   not configured.
+- Testing: **Vitest**, run via `npm test`. Chosen as a fast,
+  TypeScript-native test runner that fits the existing Next.js/ESM
+  setup without extra config.
 
 ## Deployment
 

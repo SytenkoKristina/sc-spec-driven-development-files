@@ -22,6 +22,10 @@ In scope:
   boilerplate referenced that the new page doesn't use.
 - Manual visual/responsive check in a browser at mobile and desktop
   widths.
+- Automated component/page tests (Vitest) for the Header, Main,
+  Footer, and Layout components, and for the `Home` page — covering
+  what renders (wordmark, hero heading, pitch copy, CTA target),
+  not visual/style regressions.
 
 Out of scope (deferred to later phases per `roadmap.md`):
 - A working booking/appointment flow (Phase 4) — the CTA does not
@@ -72,6 +76,13 @@ Made via stakeholder Q&A before writing this spec:
    desktop widths, no console/build errors) satisfies "attractive and
    works well on modern browsers" for this phase. No automated
    Lighthouse/accessibility score threshold.
+7. **Testing** — Vitest (already added to `tech-stack.md`'s Tooling
+   section as the project's test runner) is used here for its first
+   real tests: rendering checks on the Header/Main/Footer/Layout
+   components and the `Home` page, via
+   `@testing-library/react` + `jsdom`. These are unit/render tests,
+   not a replacement for the manual visual/responsive check in
+   Decision 6 — Vitest doesn't assert on layout/visual appearance.
 
 ## Context
 
