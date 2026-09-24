@@ -1,7 +1,6 @@
 ---
 name: changelog
 description: Update CHANGELOG.md from git history before merging a branch.
-disable-model-invocation: true
 ---
 
 # Changelog

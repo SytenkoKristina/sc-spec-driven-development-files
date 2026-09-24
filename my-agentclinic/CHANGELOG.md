@@ -1,6 +1,10 @@
 # Changelog
 
 ## 2026-09-24
+- Extract prop types, add Phase 2 test coverage, and fix review findings
+- Implement Phase 2: dashboard, domain model & booking flow
+- Add Phase 2 spec (dashboard, domain model, booking flow) with PicoCSS decision
+- Combine roadmap phases 2-5, add changelog skill
 - validation
 - Build marketing landing page (Phase 1)
 - Scaffold Next.js app (Phase 0 project scaffolding)
