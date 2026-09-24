@@ -29,10 +29,15 @@
 
 ## Styling / UI
 
-- **Tailwind CSS** (Phase 1), chosen over a component library or
-  plain CSS Modules for speed of iteration on an attractive, small,
-  live-demoable landing page (Steve's ask). Utility classes style
-  `src/app` directly; `globals.css` is just Tailwind's import.
+- **PicoCSS** (superseded Tailwind CSS in Phase 2), a classless/
+  semantic-HTML-first CSS framework. Chosen so both the marketing
+  site and the dashboard get sensible default styling (typography,
+  forms, buttons, nav) from minimal markup, without hand-rolling
+  utility classes for dashboard/booking UI. Tailwind (Phase 1's
+  original choice) is removed as part of the Phase 2 work — see
+  `specs/2026-09-24-dashboard-domain-model-booking-flow/`; the
+  Phase 1 landing page is migrated to PicoCSS rather than left on
+  Tailwind, so the repo has one styling system.
 
 ## Tooling
 
