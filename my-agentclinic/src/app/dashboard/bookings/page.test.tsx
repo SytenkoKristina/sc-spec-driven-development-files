@@ -23,6 +23,7 @@ describe("BookingsPage", () => {
         agent: { name: "TestBot" },
         ailment: { name: "Context Window Fatigue" },
         therapy: { name: "Guided Context Pruning" },
+        review: null,
       },
     ]);
 
@@ -34,10 +35,29 @@ describe("BookingsPage", () => {
     const row = screen.getByRole("row", { name: /TestBot/ });
     expect(row).toHaveTextContent("Context Window Fatigue");
     expect(row).toHaveTextContent("Guided Context Pruning");
+    expect(row).toHaveTextContent("Leave a review");
     expect(dbMock.appointment.findMany).toHaveBeenCalledWith({
       orderBy: { scheduledFor: "asc" },
-      include: { agent: true, ailment: true, therapy: true },
+      include: { agent: true, ailment: true, therapy: true, review: true },
     });
+  });
+
+  it("shows the rating instead of a prompt once an appointment has been reviewed", async () => {
+    dbMock.appointment.findMany.mockResolvedValue([
+      {
+        id: "appt1",
+        scheduledFor: new Date("2026-10-05T14:30:00"),
+        agent: { name: "TestBot" },
+        ailment: { name: "Context Window Fatigue" },
+        therapy: { name: "Guided Context Pruning" },
+        review: { rating: 4 },
+      },
+    ]);
+
+    render(await BookingsPage());
+
+    const row = screen.getByRole("row", { name: /TestBot/ });
+    expect(row).toHaveTextContent("★ 4/5");
   });
 
   it("shows an empty state with no table when there are no appointments yet", async () => {

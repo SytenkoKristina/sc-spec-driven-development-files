@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 
 const appointmentWithRelations = {
-  include: { agent: true, ailment: true, therapy: true },
+  include: { agent: true, ailment: true, therapy: true, review: true },
 } as const;
 
 export function listUpcomingAppointments() {

@@ -1,6 +1,7 @@
 import SubmitButton from "@/components/forms/SubmitButton";
 import { db } from "@/lib/db";
 import { getStringParam } from "@/lib/search-params";
+import { getTherapyRatingSummary } from "@/lib/reviews";
 import { createBooking } from "./actions";
 
 export default async function BookPage(props: PageProps<"/dashboard/book">) {
@@ -15,6 +16,8 @@ export default async function BookPage(props: PageProps<"/dashboard/book">) {
     });
 
     if (ailment) {
+      const ratingSummary = await getTherapyRatingSummary(ailment.therapyId);
+
       return (
         <section>
           <hgroup>
@@ -28,6 +31,11 @@ export default async function BookPage(props: PageProps<"/dashboard/book">) {
               <strong>Matched therapy:</strong> {ailment.therapy.name}
             </p>
             <p>{ailment.therapy.description}</p>
+            <p>
+              {ratingSummary.count > 0
+                ? `★ ${ratingSummary.average!.toFixed(1)} average (${ratingSummary.count} review${ratingSummary.count === 1 ? "" : "s"})`
+                : "No reviews yet"}
+            </p>
           </article>
           <form action={createBooking}>
             <input type="hidden" name="name" value={name} />

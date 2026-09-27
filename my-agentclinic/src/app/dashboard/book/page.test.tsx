@@ -46,11 +46,13 @@ describe("BookPage", () => {
       id: "a1",
       name: "Context Window Fatigue",
       description: "Struggling to keep track of what matters.",
+      therapyId: "t1",
       therapy: {
         name: "Guided Context Pruning",
         description: "Trim irrelevant history.",
       },
     });
+    dbMock.review.findMany.mockResolvedValue([]);
 
     render(
       await BookPage({
@@ -64,8 +66,32 @@ describe("BookPage", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(/TestBot/)).toBeInTheDocument();
     expect(screen.getByText("Guided Context Pruning")).toBeInTheDocument();
+    expect(screen.getByText("No reviews yet")).toBeInTheDocument();
     expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
     expect(dbMock.ailment.findMany).not.toHaveBeenCalled();
+  });
+
+  it("shows the aggregate rating for the matched therapy when reviews exist", async () => {
+    dbMock.ailment.findUnique.mockResolvedValue({
+      id: "a1",
+      name: "Context Window Fatigue",
+      description: "Struggling to keep track of what matters.",
+      therapyId: "t1",
+      therapy: {
+        name: "Guided Context Pruning",
+        description: "Trim irrelevant history.",
+      },
+    });
+    dbMock.review.findMany.mockResolvedValue([{ rating: 4 }, { rating: 5 }]);
+
+    render(
+      await BookPage({
+        params: Promise.resolve({}),
+        searchParams: Promise.resolve({ name: "TestBot", ailmentId: "a1" }),
+      }),
+    );
+
+    expect(screen.getByText("★ 4.5 average (2 reviews)")).toBeInTheDocument();
   });
 
   it("falls back to the picker when the selected ailment no longer exists", async () => {

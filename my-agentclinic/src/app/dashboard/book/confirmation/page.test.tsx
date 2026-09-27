@@ -39,7 +39,7 @@ describe("BookingConfirmationPage", () => {
     expect(screen.getByText("Guided Context Pruning")).toBeInTheDocument();
     expect(dbMock.appointment.findUnique).toHaveBeenCalledWith({
       where: { id: "appt1" },
-      include: { agent: true, ailment: true, therapy: true },
+      include: { agent: true, ailment: true, therapy: true, review: true },
     });
   });
 

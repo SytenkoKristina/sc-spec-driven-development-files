@@ -15,5 +15,9 @@ export function createDbMock() {
       findUnique: vi.fn(),
       create: vi.fn(),
     },
+    review: {
+      findMany: vi.fn(),
+      create: vi.fn(),
+    },
   };
 }
