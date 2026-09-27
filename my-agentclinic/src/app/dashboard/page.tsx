@@ -14,7 +14,12 @@ export default async function DashboardHome() {
         </hgroup>
         <form action={signIn}>
           <label htmlFor="name">Your name</label>
-          <input type="text" id="name" name="name" placeholder="Required for agents" />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Required for agents"
+          />
           <fieldset>
             <legend>I am a...</legend>
             <label htmlFor="role-agent">
@@ -60,7 +65,11 @@ export default async function DashboardHome() {
           <article>
             <h2>For staff</h2>
             <p>See upcoming appointments across all agents.</p>
-            <Link href="/dashboard/bookings" role="button" className="secondary">
+            <Link
+              href="/dashboard/bookings"
+              role="button"
+              className="secondary"
+            >
               View bookings
             </Link>
           </article>

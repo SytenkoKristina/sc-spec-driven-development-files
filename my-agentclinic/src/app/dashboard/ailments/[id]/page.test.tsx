@@ -38,7 +38,9 @@ describe("AilmentDetailPage", () => {
     expect(
       screen.getByRole("heading", { name: "Context Window Fatigue" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("The full, longer description.")).toBeInTheDocument();
+    expect(
+      screen.getByText("The full, longer description."),
+    ).toBeInTheDocument();
     expect(screen.getByText("Guided Context Pruning")).toBeInTheDocument();
   });
 

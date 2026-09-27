@@ -17,7 +17,10 @@ function parseScheduledFor(raw: string): Date {
   return scheduledFor;
 }
 
-async function getOwnUpcomingAppointment(agentId: string, appointmentId: string) {
+async function getOwnUpcomingAppointment(
+  agentId: string,
+  appointmentId: string,
+) {
   const appointment = await db.appointment.findUnique({
     where: { id: appointmentId },
   });

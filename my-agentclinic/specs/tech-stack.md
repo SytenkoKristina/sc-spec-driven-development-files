@@ -69,20 +69,35 @@
   type-checking/build; `tsc` is no longer invoked directly.
 - Package manager: npm (matches the committed `package-lock.json`).
 - Linting: ESLint via `eslint-config-next` (Phase 0), using
-  `create-next-app`'s defaults. Formatting (e.g. Prettier) is still
-  not configured.
+  `create-next-app`'s defaults, plus `eslint-config-prettier` (Phase
+  4 polish pass) to disable the handful of stylistic ESLint rules
+  that would otherwise fight Prettier.
+- Formatting: **Prettier** (Phase 4), default config (`.prettierrc.json`
+  is empty — no project-specific overrides needed). Scoped to source
+  code only (`.prettierignore` excludes `*.md`): this repo's specs,
+  changelog, and skill docs are hand-formatted prose, and Prettier's
+  markdown reflow would produce noisy, unrelated diffs across them.
+  `npm run format` writes, `npm run format:check` verifies in CI-like
+  fashion.
 - Testing: **Vitest**, run via `npm test`. Chosen as a fast,
   TypeScript-native test runner that fits the existing Next.js/ESM
   setup without extra config.
 
 ## Deployment
 
-- Not yet decided. Next.js's own hosting target (e.g. a
-  Vercel-compatible platform) is the path of least resistance given
-  the framework choice, but this is not finalized.
+- **Vercel** (Phase 4), matching Next.js's own recommended hosting
+  path and requiring no separate infra to provision — consistent
+  with this repo's zero-external-infra, demo/teaching posture
+  (`mission.md`). One constraint worth stating explicitly rather
+  than leaving as a surprise: Vercel's filesystem is ephemeral
+  per-deploy, so the SQLite `dev.db` file (and anything written to
+  it in production) does not persist across deploys — acceptable for
+  a demo, but a real production deployment would need a durable data
+  layer (e.g. a hosted Postgres) instead. Connecting the actual
+  Vercel project/account is a manual step, not automated here.
 
 ## Open decisions
 
-This file intentionally leaves some choices unresolved (deployment,
-formatting) rather than guessing. Each should be settled — and this
-file updated — when its roadmap phase starts.
+Both decisions this file originally left open (deployment,
+formatting) are now resolved, as of the Phase 4 polish pass
+(`specs/2026-09-27-polish-pass/`).

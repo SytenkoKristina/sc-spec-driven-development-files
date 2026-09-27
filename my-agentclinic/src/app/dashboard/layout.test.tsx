@@ -27,7 +27,9 @@ describe("DashboardLayout", () => {
     expect(
       screen.getByRole("link", { name: "AgentClinic Dashboard" }),
     ).toHaveAttribute("href", "/dashboard");
-    expect(screen.queryByRole("link", { name: "Book" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: "Book" }),
+    ).not.toBeInTheDocument();
     expect(
       screen.queryByRole("link", { name: "Bookings" }),
     ).not.toBeInTheDocument();
@@ -59,7 +61,9 @@ describe("DashboardLayout", () => {
     expect(
       screen.queryByRole("link", { name: "Bookings" }),
     ).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Sign out" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Sign out" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "My bookings" })).toHaveAttribute(
       "href",
       "/dashboard/book/mine",
@@ -85,7 +89,11 @@ describe("DashboardLayout", () => {
       "href",
       "/dashboard/bookings",
     );
-    expect(screen.queryByRole("link", { name: "Book" })).not.toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Sign out" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: "Book" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Sign out" }),
+    ).toBeInTheDocument();
   });
 });

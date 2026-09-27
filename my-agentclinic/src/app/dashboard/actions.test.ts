@@ -1,14 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { upsertAgentByNameMock, createSessionMock, destroySessionMock, redirectMock } =
-  vi.hoisted(() => ({
-    upsertAgentByNameMock: vi.fn(),
-    createSessionMock: vi.fn(),
-    destroySessionMock: vi.fn(),
-    redirectMock: vi.fn((url: string) => {
-      throw new Error(`REDIRECT:${url}`);
-    }),
-  }));
+const {
+  upsertAgentByNameMock,
+  createSessionMock,
+  destroySessionMock,
+  redirectMock,
+} = vi.hoisted(() => ({
+  upsertAgentByNameMock: vi.fn(),
+  createSessionMock: vi.fn(),
+  destroySessionMock: vi.fn(),
+  redirectMock: vi.fn((url: string) => {
+    throw new Error(`REDIRECT:${url}`);
+  }),
+}));
 
 vi.mock("@/lib/agents", () => ({ upsertAgentByName: upsertAgentByNameMock }));
 vi.mock("@/lib/session", () => ({

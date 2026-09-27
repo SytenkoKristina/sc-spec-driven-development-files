@@ -62,9 +62,7 @@ describe("BookingsPage", () => {
 
     render(await renderPage());
 
-    expect(
-      screen.getByText("No appointments booked yet."),
-    ).toBeInTheDocument();
+    expect(screen.getByText("No appointments booked yet.")).toBeInTheDocument();
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
   });
 

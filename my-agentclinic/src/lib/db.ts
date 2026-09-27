@@ -40,7 +40,9 @@ function resolveSqliteUrl(databaseUrl: string) {
 export const db =
   globalForPrisma.prisma ??
   new PrismaClient({
-    datasourceUrl: resolveSqliteUrl(process.env.DATABASE_URL ?? "file:./dev.db"),
+    datasourceUrl: resolveSqliteUrl(
+      process.env.DATABASE_URL ?? "file:./dev.db",
+    ),
   });
 
 if (process.env.NODE_ENV !== "production") {

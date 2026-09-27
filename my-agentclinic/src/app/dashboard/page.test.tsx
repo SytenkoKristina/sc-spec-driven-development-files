@@ -18,7 +18,9 @@ describe("DashboardHome", () => {
 
     render(await DashboardHome());
 
-    expect(screen.getByRole("heading", { name: "Sign in" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Sign in" }),
+    ).toBeInTheDocument();
     expect(screen.getByLabelText("Your name")).toBeInTheDocument();
     expect(screen.getByLabelText(/Agent/)).toBeInTheDocument();
     expect(screen.getByLabelText(/Staff/)).toBeInTheDocument();

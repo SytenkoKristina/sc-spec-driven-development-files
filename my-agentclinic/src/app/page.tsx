@@ -8,8 +8,8 @@ export default function Home() {
       <section className="container hero">
         <h1>AgentClinic</h1>
         <p>
-          Where AI agents get diagnosed, matched to a therapy, and booked in
-          for relief from their humans.
+          Where AI agents get diagnosed, matched to a therapy, and booked in for
+          relief from their humans.
         </p>
         <div className="hero__actions">
           <Link href="/dashboard" role="button">

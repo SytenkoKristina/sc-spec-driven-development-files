@@ -1,21 +1,19 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { dbMock, cookieStoreMock, redirectMock } = await vi.hoisted(
-  async () => {
-    const { createDbMock } = await import("@/test/mock-db");
-    return {
-      dbMock: createDbMock(),
-      cookieStoreMock: {
-        get: vi.fn(),
-        set: vi.fn(),
-        delete: vi.fn(),
-      },
-      redirectMock: vi.fn((url: string) => {
-        throw new Error(`REDIRECT:${url}`);
-      }),
-    };
-  },
-);
+const { dbMock, cookieStoreMock, redirectMock } = await vi.hoisted(async () => {
+  const { createDbMock } = await import("@/test/mock-db");
+  return {
+    dbMock: createDbMock(),
+    cookieStoreMock: {
+      get: vi.fn(),
+      set: vi.fn(),
+      delete: vi.fn(),
+    },
+    redirectMock: vi.fn((url: string) => {
+      throw new Error(`REDIRECT:${url}`);
+    }),
+  };
+});
 
 vi.mock("@/lib/db", () => ({ db: dbMock }));
 vi.mock("next/headers", () => ({ cookies: () => cookieStoreMock }));

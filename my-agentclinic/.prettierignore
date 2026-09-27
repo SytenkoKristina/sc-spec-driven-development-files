@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+src/generated/prisma
+prisma/migrations
+*.tsbuildinfo
+
+# Prose (specs, changelog, skill docs) is hand-formatted; Prettier's
+# markdown reflow would produce noisy, unrelated diffs across the repo.
+# Formatting here is scoped to source code.
+*.md

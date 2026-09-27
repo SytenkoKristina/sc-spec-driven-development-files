@@ -19,7 +19,11 @@ vi.mock("@/lib/session", () => ({
 }));
 vi.mock("next/navigation", () => ({ redirect: redirectMock }));
 
-import { cancelAppointment, createBooking, rescheduleAppointment } from "./actions";
+import {
+  cancelAppointment,
+  createBooking,
+  rescheduleAppointment,
+} from "./actions";
 
 function buildFormData(fields: Record<string, string>) {
   const formData = new FormData();

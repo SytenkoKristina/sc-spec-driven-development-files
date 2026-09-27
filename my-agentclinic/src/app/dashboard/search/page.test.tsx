@@ -29,9 +29,7 @@ describe("SearchPage", () => {
   it("prompts for a search term when none is given, without querying the db", async () => {
     render(await renderPage());
 
-    expect(
-      screen.getByText("Enter a search term above."),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Enter a search term above.")).toBeInTheDocument();
     expect(dbMock.ailment.findMany).not.toHaveBeenCalled();
     expect(dbMock.therapy.findMany).not.toHaveBeenCalled();
   });
