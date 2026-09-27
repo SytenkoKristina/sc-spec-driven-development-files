@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { getAppointmentById } from "@/lib/appointments";
 import { getStringParam } from "@/lib/search-params";
+import { requireAgentSession } from "@/lib/session";
 
 export default async function BookingConfirmationPage(
   props: PageProps<"/dashboard/book/confirmation">,
 ) {
+  await requireAgentSession();
   const searchParams = await props.searchParams;
   const id = getStringParam(searchParams, "id");
 

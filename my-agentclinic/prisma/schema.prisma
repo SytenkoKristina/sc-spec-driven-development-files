@@ -16,6 +16,18 @@ model Agent {
   name         String        @unique
   createdAt    DateTime      @default(now())
   appointments Appointment[]
+  sessions     Session[]
+}
+
+// The cookie stores this row's `id` directly as the session token — it's a
+// cuid (unguessable, collision-resistant), and role/name live server-side
+// only, so a client can't forge or escalate a session by editing the cookie.
+model Session {
+  id        String   @id @default(cuid())
+  role      String
+  agentId   String?
+  agent     Agent?   @relation(fields: [agentId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model Ailment {

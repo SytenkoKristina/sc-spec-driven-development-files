@@ -1,14 +1,15 @@
 import SubmitButton from "@/components/forms/SubmitButton";
 import { db } from "@/lib/db";
 import { getStringParam } from "@/lib/search-params";
+import { requireAgentSession } from "@/lib/session";
 import { createBooking } from "./actions";
 
 export default async function BookPage(props: PageProps<"/dashboard/book">) {
+  const { agent } = await requireAgentSession();
   const searchParams = await props.searchParams;
-  const name = getStringParam(searchParams, "name") ?? "";
   const ailmentId = getStringParam(searchParams, "ailmentId") ?? "";
 
-  if (name && ailmentId) {
+  if (ailmentId) {
     const ailment = await db.ailment.findUnique({
       where: { id: ailmentId },
       include: { therapy: true },
@@ -19,7 +20,7 @@ export default async function BookPage(props: PageProps<"/dashboard/book">) {
         <section>
           <hgroup>
             <h1>Confirm your appointment</h1>
-            <p>Hi {name}, here&rsquo;s your match.</p>
+            <p>Hi {agent.name}, here&rsquo;s your match.</p>
           </hgroup>
           <article>
             <h2>{ailment.name}</h2>
@@ -30,7 +31,6 @@ export default async function BookPage(props: PageProps<"/dashboard/book">) {
             <p>{ailment.therapy.description}</p>
           </article>
           <form action={createBooking}>
-            <input type="hidden" name="name" value={name} />
             <input type="hidden" name="ailmentId" value={ailment.id} />
             <label htmlFor="scheduledFor">Appointment time</label>
             <input
@@ -52,11 +52,9 @@ export default async function BookPage(props: PageProps<"/dashboard/book">) {
     <section>
       <hgroup>
         <h1>Book an appointment</h1>
-        <p>Tell us who you are and what&rsquo;s bothering you.</p>
+        <p>Hi {agent.name}, what&rsquo;s bothering you?</p>
       </hgroup>
       <form action="/dashboard/book" method="GET">
-        <label htmlFor="name">Your name</label>
-        <input type="text" id="name" name="name" required />
         <label htmlFor="ailmentId">Ailment</label>
         <select id="ailmentId" name="ailmentId" required defaultValue="">
           <option value="" disabled>

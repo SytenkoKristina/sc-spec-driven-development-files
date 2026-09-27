@@ -1,18 +1,22 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { dbMock } = await vi.hoisted(async () => {
+const { dbMock, requireStaffSessionMock } = await vi.hoisted(async () => {
   const { createDbMock } = await import("@/test/mock-db");
-  return { dbMock: createDbMock() };
+  return { dbMock: createDbMock(), requireStaffSessionMock: vi.fn() };
 });
 
 vi.mock("@/lib/db", () => ({ db: dbMock }));
+vi.mock("@/lib/session", () => ({
+  requireStaffSession: requireStaffSessionMock,
+}));
 
 import BookingsPage from "./page";
 
 describe("BookingsPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    requireStaffSessionMock.mockResolvedValue({ id: "sess1", role: "STAFF" });
   });
 
   it("lists every appointment with agent, ailment, therapy, and time", async () => {

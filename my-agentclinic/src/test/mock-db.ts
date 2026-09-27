@@ -15,5 +15,10 @@ export function createDbMock() {
       findUnique: vi.fn(),
       create: vi.fn(),
     },
+    session: {
+      create: vi.fn(),
+      findUnique: vi.fn(),
+      delete: vi.fn(),
+    },
   };
 }

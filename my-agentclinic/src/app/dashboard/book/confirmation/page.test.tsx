@@ -1,18 +1,25 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { dbMock } = await vi.hoisted(async () => {
+const { dbMock, requireAgentSessionMock } = await vi.hoisted(async () => {
   const { createDbMock } = await import("@/test/mock-db");
-  return { dbMock: createDbMock() };
+  return { dbMock: createDbMock(), requireAgentSessionMock: vi.fn() };
 });
 
 vi.mock("@/lib/db", () => ({ db: dbMock }));
+vi.mock("@/lib/session", () => ({
+  requireAgentSession: requireAgentSessionMock,
+}));
 
 import BookingConfirmationPage from "./page";
 
 describe("BookingConfirmationPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    requireAgentSessionMock.mockResolvedValue({
+      session: { id: "sess1", role: "AGENT" },
+      agent: { id: "agent1", name: "TestBot" },
+    });
   });
 
   it("shows the booked appointment's agent, ailment, therapy, and time", async () => {

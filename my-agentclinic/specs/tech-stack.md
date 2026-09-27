@@ -36,6 +36,18 @@
   Prisma 6.x supports Node >=18.18. Revisit the pin once the
   environment is on an LTS Node version.
 
+## Auth
+
+- **Lightweight role-picker session** (Phase 3), not a credential
+  system: an agent or staff member signs in with a name + role
+  (`Agent`/`Staff`) at `/dashboard`, no password. A server-side
+  `Session` row (`prisma/schema.prisma`) is created and its `id` is
+  stored as an opaque token in an httpOnly cookie (`src/lib/session.ts`)
+  — the cookie can't be read or forged client-side, but there's no
+  encryption/JWT layer beyond that, since this repo has no real
+  accounts to protect (`mission.md`'s teaching/demo framing). See
+  `specs/2026-09-27-accounts-and-access/`.
+
 ## Styling / UI
 
 - **PicoCSS** (superseded Tailwind CSS in Phase 2), a

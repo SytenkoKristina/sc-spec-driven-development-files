@@ -1,21 +1,28 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { dbMock } = await vi.hoisted(async () => {
+const { dbMock, requireAgentSessionMock } = await vi.hoisted(async () => {
   const { createDbMock } = await import("@/test/mock-db");
-  return { dbMock: createDbMock() };
+  return { dbMock: createDbMock(), requireAgentSessionMock: vi.fn() };
 });
 
 vi.mock("@/lib/db", () => ({ db: dbMock }));
+vi.mock("@/lib/session", () => ({
+  requireAgentSession: requireAgentSessionMock,
+}));
 
 import BookPage from "./page";
 
 describe("BookPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    requireAgentSessionMock.mockResolvedValue({
+      session: { id: "sess1", role: "AGENT" },
+      agent: { id: "agent1", name: "TestBot" },
+    });
   });
 
-  it("shows a name + ailment picker sourced from the database when no selection has been made", async () => {
+  it("shows an ailment picker sourced from the database when no selection has been made", async () => {
     dbMock.ailment.findMany.mockResolvedValue([
       { id: "a1", name: "Context Window Fatigue" },
       { id: "a2", name: "Hallucination Spirals" },
@@ -31,7 +38,7 @@ describe("BookPage", () => {
     expect(
       screen.getByRole("heading", { name: "Book an appointment" }),
     ).toBeInTheDocument();
-    expect(screen.getByLabelText("Your name")).toBeInTheDocument();
+    expect(screen.getByText(/TestBot/)).toBeInTheDocument();
     expect(
       screen.getByRole("option", { name: "Context Window Fatigue" }),
     ).toBeInTheDocument();
@@ -41,7 +48,7 @@ describe("BookPage", () => {
     expect(dbMock.ailment.findUnique).not.toHaveBeenCalled();
   });
 
-  it("shows the one matched therapy once a name and ailment are selected, with no therapy-choice step", async () => {
+  it("shows the one matched therapy once an ailment is selected, with no therapy-choice step", async () => {
     dbMock.ailment.findUnique.mockResolvedValue({
       id: "a1",
       name: "Context Window Fatigue",
@@ -55,7 +62,7 @@ describe("BookPage", () => {
     render(
       await BookPage({
         params: Promise.resolve({}),
-        searchParams: Promise.resolve({ name: "TestBot", ailmentId: "a1" }),
+        searchParams: Promise.resolve({ ailmentId: "a1" }),
       }),
     );
 
@@ -75,7 +82,7 @@ describe("BookPage", () => {
     render(
       await BookPage({
         params: Promise.resolve({}),
-        searchParams: Promise.resolve({ name: "TestBot", ailmentId: "gone" }),
+        searchParams: Promise.resolve({ ailmentId: "gone" }),
       }),
     );
 
