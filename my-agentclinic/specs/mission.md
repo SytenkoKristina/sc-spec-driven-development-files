@@ -19,6 +19,9 @@ and treated — with a bit of humor, but genuine utility.
 
 ## Who it's for
 
+These are the primary audience: product decisions optimize for them
+first, ahead of the secondary teaching/demo audience below.
+
 - **Agents**, who come in with an ailment, get matched to a therapy,
   and book an appointment.
 - **Staff**, who need a dashboard to manage ailments, therapies, and
@@ -26,10 +29,10 @@ and treated — with a bit of humor, but genuine utility.
 - **Visitors**, who land on the site and should immediately understand
   what AgentClinic does and want to explore further.
 
-## Target audience
+## Target audience (secondary)
 
-AgentClinic is also a teaching and demo artifact in its own right,
-built to be read and extended by:
+AgentClinic is also a teaching and demo artifact, built to be read
+and extended by:
 
 - **Course students** learning spec-driven development with AI coding
   agents — the specs in this directory are meant to be a clear,
@@ -38,8 +41,10 @@ built to be read and extended by:
   small, incremental roadmap phases (see `roadmap.md`) exist so a
   phase can be built live, start to finish, in a short demo window.
 
-This shapes how the project is built as much as what it does: clarity
-and small, demoable steps matter as much as the product itself.
+This shapes *how* the project is built — clarity and small, demoable
+steps — but never overrides what the in-universe users above actually
+need. When the two pull in different directions, the product (agents
+and staff) wins.
 
 ## What success looks like
 
