@@ -17,11 +17,30 @@ export default async function DashboardLayout({
             </strong>
           </li>
         </ul>
+        {session && (
+          <ul>
+            <li>
+              <form action="/dashboard/search" method="GET" role="search">
+                <input
+                  type="search"
+                  name="q"
+                  aria-label="Search ailments and therapies"
+                  placeholder="Search…"
+                />
+              </form>
+            </li>
+          </ul>
+        )}
         <ul>
           {session?.role === "AGENT" && (
-            <li>
-              <Link href="/dashboard/book">Book</Link>
-            </li>
+            <>
+              <li>
+                <Link href="/dashboard/book">Book</Link>
+              </li>
+              <li>
+                <Link href="/dashboard/book/mine">My bookings</Link>
+              </li>
+            </>
           )}
           {session?.role === "STAFF" && (
             <li>

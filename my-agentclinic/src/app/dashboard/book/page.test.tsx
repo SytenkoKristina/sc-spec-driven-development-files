@@ -45,6 +45,9 @@ describe("BookPage", () => {
     expect(
       screen.getByRole("option", { name: "Hallucination Spirals" }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Context Window Fatigue" }),
+    ).toHaveAttribute("href", "/dashboard/ailments/a1");
     expect(dbMock.ailment.findUnique).not.toHaveBeenCalled();
   });
 
@@ -54,6 +57,7 @@ describe("BookPage", () => {
       name: "Context Window Fatigue",
       description: "Struggling to keep track of what matters.",
       therapy: {
+        id: "t1",
         name: "Guided Context Pruning",
         description: "Trim irrelevant history.",
       },
@@ -70,7 +74,9 @@ describe("BookPage", () => {
       screen.getByRole("heading", { name: "Confirm your appointment" }),
     ).toBeInTheDocument();
     expect(screen.getByText(/TestBot/)).toBeInTheDocument();
-    expect(screen.getByText("Guided Context Pruning")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Guided Context Pruning" }),
+    ).toHaveAttribute("href", "/dashboard/therapies/t1");
     expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
     expect(dbMock.ailment.findMany).not.toHaveBeenCalled();
   });

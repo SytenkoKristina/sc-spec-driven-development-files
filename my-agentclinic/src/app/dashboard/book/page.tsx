@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SubmitButton from "@/components/forms/SubmitButton";
 import { db } from "@/lib/db";
 import { getStringParam } from "@/lib/search-params";
@@ -23,10 +24,17 @@ export default async function BookPage(props: PageProps<"/dashboard/book">) {
             <p>Hi {agent.name}, here&rsquo;s your match.</p>
           </hgroup>
           <article>
-            <h2>{ailment.name}</h2>
+            <h2>
+              <Link href={`/dashboard/ailments/${ailment.id}`}>
+                {ailment.name}
+              </Link>
+            </h2>
             <p>{ailment.description}</p>
             <p>
-              <strong>Matched therapy:</strong> {ailment.therapy.name}
+              <strong>Matched therapy:</strong>{" "}
+              <Link href={`/dashboard/therapies/${ailment.therapy.id}`}>
+                {ailment.therapy.name}
+              </Link>
             </p>
             <p>{ailment.therapy.description}</p>
           </article>
@@ -68,6 +76,18 @@ export default async function BookPage(props: PageProps<"/dashboard/book">) {
         </select>
         <button type="submit">Continue</button>
       </form>
+      <details>
+        <summary>Not sure? Learn more about each ailment</summary>
+        <ul>
+          {ailments.map((ailment) => (
+            <li key={ailment.id}>
+              <Link href={`/dashboard/ailments/${ailment.id}`}>
+                {ailment.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </details>
     </section>
   );
 }

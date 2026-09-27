@@ -26,6 +26,7 @@ import {
   destroySession,
   getSession,
   requireAgentSession,
+  requireAnySession,
   requireStaffSession,
 } from "./session";
 
@@ -191,6 +192,23 @@ describe("session", () => {
       await expect(requireStaffSession()).rejects.toThrow(
         "REDIRECT:/dashboard",
       );
+    });
+  });
+
+  describe("requireAnySession", () => {
+    it("returns the session for either role", async () => {
+      cookieStoreMock.set("session_token", "sess1");
+      dbMock.session.findUnique.mockResolvedValue({
+        id: "sess1",
+        role: "STAFF",
+        agent: null,
+      });
+
+      expect((await requireAnySession()).role).toBe("STAFF");
+    });
+
+    it("redirects to /dashboard when there is no session", async () => {
+      await expect(requireAnySession()).rejects.toThrow("REDIRECT:/dashboard");
     });
   });
 });

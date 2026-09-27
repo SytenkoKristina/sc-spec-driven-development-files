@@ -34,6 +34,11 @@ describe("DashboardLayout", () => {
     expect(
       screen.queryByRole("button", { name: "Sign out" }),
     ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("searchbox", {
+        name: "Search ailments and therapies",
+      }),
+    ).not.toBeInTheDocument();
     expect(screen.getByText("Page content")).toBeInTheDocument();
   });
 
@@ -55,6 +60,15 @@ describe("DashboardLayout", () => {
       screen.queryByRole("link", { name: "Bookings" }),
     ).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Sign out" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "My bookings" })).toHaveAttribute(
+      "href",
+      "/dashboard/book/mine",
+    );
+    expect(
+      screen.getByRole("searchbox", {
+        name: "Search ailments and therapies",
+      }),
+    ).toBeInTheDocument();
   });
 
   it("shows the Bookings link and sign-out for a STAFF session, not Book", async () => {

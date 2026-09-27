@@ -31,29 +31,32 @@ model Session {
 }
 
 model Ailment {
-  id           String        @id @default(cuid())
-  name         String        @unique
-  description  String
-  therapyId    String        @unique
-  therapy      Therapy       @relation(fields: [therapyId], references: [id])
-  appointments Appointment[]
+  id              String        @id @default(cuid())
+  name            String        @unique
+  description     String
+  longDescription String
+  therapyId       String        @unique
+  therapy         Therapy       @relation(fields: [therapyId], references: [id])
+  appointments    Appointment[]
 }
 
 model Therapy {
-  id           String        @id @default(cuid())
-  name         String        @unique
-  description  String
-  ailment      Ailment?
-  appointments Appointment[]
+  id              String        @id @default(cuid())
+  name            String        @unique
+  description     String
+  longDescription String
+  ailment         Ailment?
+  appointments    Appointment[]
 }
 
 model Appointment {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   agentId      String
   ailmentId    String
   therapyId    String
   scheduledFor DateTime
-  createdAt    DateTime @default(now())
+  createdAt    DateTime  @default(now())
+  cancelledAt  DateTime?
 
   agent   Agent   @relation(fields: [agentId], references: [id])
   ailment Ailment @relation(fields: [ailmentId], references: [id])

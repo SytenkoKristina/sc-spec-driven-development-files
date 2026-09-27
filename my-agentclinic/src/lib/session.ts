@@ -62,3 +62,11 @@ export async function requireAgentSession() {
 export async function requireStaffSession() {
   return requireSession("STAFF");
 }
+
+export async function requireAnySession() {
+  const session = await getSession();
+  if (!session) {
+    redirect("/dashboard");
+  }
+  return session;
+}
