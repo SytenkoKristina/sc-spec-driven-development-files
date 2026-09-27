@@ -5,3 +5,12 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
+
+/* PicoCSS's <nav> and its <ul> groups are flex with no wrap — fine
+   for the marketing header (no <nav>), but the dashboard nav now has
+   three groups (brand, search, links/sign-out) that no longer fit on
+   one line at narrow widths. */
+nav,
+nav ul {
+  flex-wrap: wrap;
+}

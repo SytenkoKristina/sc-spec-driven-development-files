@@ -41,48 +41,50 @@ export default async function BookingsPage(
       {appointments.length === 0 ? (
         <p>No appointments booked yet.</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Agent</th>
-              <th scope="col">Ailment</th>
-              <th scope="col">Therapy</th>
-              <th scope="col">Scheduled for</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {appointments.map((appointment) => {
-              const isNew = appointment.createdAt > session.createdAt;
-              return (
-                <tr key={appointment.id}>
-                  <td>
-                    {appointment.agent.name}
-                    {isNew && <mark> New</mark>}
-                  </td>
-                  <td>{appointment.ailment.name}</td>
-                  <td>{appointment.therapy.name}</td>
-                  <td>{appointment.scheduledFor.toLocaleString()}</td>
-                  <td>
-                    <form action={cancelBookingAsStaff}>
-                      <input
-                        type="hidden"
-                        name="appointmentId"
-                        value={appointment.id}
-                      />
-                      <SubmitButton
-                        pendingLabel="Cancelling…"
-                        className="secondary"
-                      >
-                        Cancel
-                      </SubmitButton>
-                    </form>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <figure className="overflow-auto">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Agent</th>
+                <th scope="col">Ailment</th>
+                <th scope="col">Therapy</th>
+                <th scope="col">Scheduled for</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointments.map((appointment) => {
+                const isNew = appointment.createdAt > session.createdAt;
+                return (
+                  <tr key={appointment.id}>
+                    <td>
+                      {appointment.agent.name}
+                      {isNew && <mark> New</mark>}
+                    </td>
+                    <td>{appointment.ailment.name}</td>
+                    <td>{appointment.therapy.name}</td>
+                    <td>{appointment.scheduledFor.toLocaleString()}</td>
+                    <td>
+                      <form action={cancelBookingAsStaff}>
+                        <input
+                          type="hidden"
+                          name="appointmentId"
+                          value={appointment.id}
+                        />
+                        <SubmitButton
+                          pendingLabel="Cancelling…"
+                          className="secondary"
+                        >
+                          Cancel
+                        </SubmitButton>
+                      </form>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </figure>
       )}
     </section>
   );
